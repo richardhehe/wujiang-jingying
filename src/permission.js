@@ -10,7 +10,8 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login'] // no redirect whitelist
 
-router.beforeEach(async(to, from, next) => {
+// eslint-disable-next-line space-before-function-paren
+router.beforeEach(async (to, from, next) => {
   // start progress bar
   NProgress.start()
 
@@ -21,6 +22,10 @@ router.beforeEach(async(to, from, next) => {
   const hasToken = getToken()
 
   if (hasToken) {
+    // if (to.path === '/userManagement/index' && localStorage.getItem('isAdmin') === '0') {
+    //   router.options.routes[3].hidden = true
+    //   next({ path: '*' })
+    // }
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
       next({ path: '/' })
@@ -33,7 +38,12 @@ router.beforeEach(async(to, from, next) => {
         try {
           // get user info
           await store.dispatch('user/getInfo')
-
+          // admin 用户显示用户管理
+          if (localStorage.getItem('isAdmin') === '0') {
+            router.options.routes[3].hidden = true
+          } else {
+            router.options.routes[3].hidden = false
+          }
           next()
         } catch (error) {
           // remove token and go to login page to re-login
