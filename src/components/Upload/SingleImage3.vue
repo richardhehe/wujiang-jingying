@@ -5,6 +5,7 @@
       :multiple="false"
       :show-file-list="false"
       :on-success="handleImageSuccess"
+      :on-error="handleImageErro"
       class="image-uploader"
       drag
       action="https://wj.phoemix.net/elite/file"
@@ -65,6 +66,9 @@ export default {
       // this.emitInput(file.data)
       const imageId = file.data.split(':')[0]
       this.$emit('getId', +imageId)
+    },
+    handleImageErro(erro, file) {
+      this.$message.error('图片上传失败')
     },
     beforeUpload() {
       const _self = this

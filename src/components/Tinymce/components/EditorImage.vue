@@ -14,6 +14,7 @@
         :show-file-list="true"
         :on-remove="handleRemove"
         :on-success="handleSuccess"
+        :on-error="handleImageErro"
         :before-upload="beforeUpload"
         class="editor-slide-upload"
         action="https://wj.phoemix.net/elite/file"
@@ -50,7 +51,7 @@ export default {
       return Object.keys(this.listObj).every(item => this.listObj[item].hasSuccess)
     },
     handleSubmit() {
-      // console.log(this.listObj)
+      console.log(this.listObj)
       const arr = Object.keys(this.listObj).map(v => this.listObj[v])
       // console.log(arr)
       if (!this.checkAllSuccess()) {
@@ -63,14 +64,23 @@ export default {
       this.dialogVisible = false
     },
     handleSuccess(response, file) {
-      console.log(response)
-      console.log(file)
       const uid = file.uid
       const objKeyArr = Object.keys(this.listObj)
       for (let i = 0, len = objKeyArr.length; i < len; i++) {
         if (this.listObj[objKeyArr[i]].uid === uid) {
           this.listObj[objKeyArr[i]].url = response.data.split(':')[0]
           this.listObj[objKeyArr[i]].hasSuccess = true
+          return
+        }
+      }
+    },
+    handleImageErro(erro, file) {
+      const uid = file.uid
+      const objKeyArr = Object.keys(this.listObj)
+      for (let i = 0, len = objKeyArr.length; i < len; i++) {
+        if (this.listObj[objKeyArr[i]].uid === uid) {
+          delete this.listObj[objKeyArr[i]]
+          this.$message.error('图片上传失败')
           return
         }
       }
@@ -86,6 +96,7 @@ export default {
       }
     },
     beforeUpload(file) {
+      console.log(file)
       const _self = this
       const _URL = window.URL || window.webkitURL
       const fileName = file.uid
