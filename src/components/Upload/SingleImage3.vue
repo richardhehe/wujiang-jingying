@@ -7,7 +7,7 @@
       :on-success="handleImageSuccess"
       class="image-uploader"
       drag
-      action="http://139.224.208.47:8087/elite/file"
+      action="https://wj.phoemix.net/elite/file"
     >
       <i class="el-icon-upload" />
       <div class="el-upload__text">
@@ -20,7 +20,7 @@
         <!-- <div v-show="imageUrl.length>1" class="image-preview-wrapper"> -->
         <!-- <img :src="imageUrl" /> -->
         <!-- eslint-disable-next-line vue/html-self-closing -->
-        <img :src="'http://139.224.208.47/elite/file/' + value" alt />
+        <img :src="'https://wj.phoemix.net/elite/file/' + value" alt />
         <div class="image-preview-action">
           <i class="el-icon-delete" @click="rmImage" />
         </div>
@@ -64,7 +64,7 @@ export default {
     handleImageSuccess(file) {
       // this.emitInput(file.data)
       const imageId = file.data.split(':')[0]
-      this.$emit('getId', imageId)
+      this.$emit('getId', +imageId)
     },
     beforeUpload() {
       const _self = this

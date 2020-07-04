@@ -16,7 +16,7 @@
         :on-success="handleSuccess"
         :before-upload="beforeUpload"
         class="editor-slide-upload"
-        action="http://139.224.208.47:8087/elite/file"
+        action="https://wj.phoemix.net/elite/file"
         list-type="picture-card"
       >
         <el-button size="small" type="primary">点击上传</el-button>

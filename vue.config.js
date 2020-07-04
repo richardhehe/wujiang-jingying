@@ -24,7 +24,7 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  // publicPath: '/wujiang/',
+  // publicPath: '/',
   publicPath: process.env.NODE_ENV === 'production' ? '/wujiang/' : '/',
   outputDir: 'dist',
   assetsDir: 'static',
@@ -51,6 +51,7 @@ module.exports = {
 
     // before: require('./mock/mock-server.js')
   },
+  // configureWebpack and chainWebpack 两种方式作用完全相同,区别是一个webpack配置方式是对象,一个是链式
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
@@ -93,6 +94,7 @@ module.exports = {
       })
       .end()
 
+    // 开发阶段自定义配置
     config.when(process.env.NODE_ENV !== 'development', config => {
       config
         .plugin('ScriptExtHtmlWebpackPlugin')
@@ -129,5 +131,15 @@ module.exports = {
       })
       config.optimization.runtimeChunk('single')
     })
+    // 生产阶段自定义配置
+    // config.when(process.env.NODE_ENV !== 'production', config => {
+    //   // 通过externals加载外部CDN资源,凡是申明在externals中的依赖包,都不会被打包到vendor.js文件
+    //   // 然后要通过link 或 script 引入CDN资源
+    //   config.set('externals', {
+    //     vue: 'Vue',
+    //     axios: 'axios',
+    //     'vue-router': 'VueRouter'
+    //   })
+    // })
   }
 }
