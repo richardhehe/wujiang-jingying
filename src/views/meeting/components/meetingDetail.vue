@@ -12,7 +12,9 @@
             <el-form-item label="会议开始时间" prop="startTime">
               <el-date-picker
                 v-model="meetingForm.startTime"
-                type="date"
+                type="datetime"
+                format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"
                 placeholder="选择开始时间"
                 style="width: 100%;"
               />
@@ -20,8 +22,10 @@
             <el-form-item label="会议结束时间" prop="endTime">
               <el-date-picker
                 v-model="meetingForm.endTime"
-                type="date"
+                type="datetime"
                 placeholder="选择结束时间"
+                format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss"
                 style="width: 100%;"
               />
             </el-form-item>
@@ -130,7 +134,7 @@
               <el-upload
                 class="upload-demo"
                 :show-file-list="false"
-                action="http://139.224.208.47:8087/elite/file"
+                action="https://wj.phoemix.net/elite/file"
                 :on-success="uploadSuccess"
               >
                 <el-button class="filter-item" style="margin-left: 10px;" type="primary">导入参加人员</el-button>
@@ -355,7 +359,6 @@ import {
 } from '@/api/meeting'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
-
 export default {
   name: 'MeetingDetail',
   components: { Pagination },

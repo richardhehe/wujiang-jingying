@@ -89,7 +89,8 @@
         <el-form-item label="会议开始时间" prop="startTime">
           <el-date-picker
             v-model="meetingForm.startTime"
-            type="date"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
             placeholder="选择开始时间"
             style="width: 100%;"
           />
@@ -97,7 +98,8 @@
         <el-form-item label="会议结束时间" prop="endTime">
           <el-date-picker
             v-model="meetingForm.endTime"
-            type="date"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
             placeholder="选择结束时间"
             style="width: 100%;"
           />
@@ -122,7 +124,6 @@
 import { fetchList, createMeeting, changeStatus, deleteMeeting } from '@/api/meeting'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
-
 export default {
   name: 'ComplexTable',
 
@@ -139,7 +140,7 @@ export default {
         pageSize: 10
       },
       meetingForm: {
-        createTime: new Date(),
+        // createTime: new Date(),
         name: '',
         endTime: '',
         startTime: '',
@@ -148,8 +149,8 @@ export default {
       addMeetingVisible: false,
       rules: {
         name: [{ required: true, message: '请输入会议名称', trigger: 'change' }],
-        startTime: [{ type: 'date', required: true, message: '请选择会议开始时间', trigger: 'change' }],
-        endTime: [{ type: 'date', required: true, message: '请选择会议结束时间', trigger: 'change' }]
+        startTime: [{ required: true, message: '请选择会议开始时间', trigger: 'change' }],
+        endTime: [{ required: true, message: '请选择会议结束时间', trigger: 'change' }]
       }
     }
   },
@@ -171,7 +172,7 @@ export default {
     },
     resetTemp() {
       this.meetingForm = {
-        createTime: new Date(),
+        // createTime: new Date(),
         name: '',
         endTime: '',
         startTime: '',
@@ -191,7 +192,8 @@ export default {
       this.$refs['meetingForm'].validate(valid => {
         if (valid) {
           createMeeting(this.meetingForm).then(res => {
-            this.list.unshift(res.data)
+            // this.list.unshift(res.data)
+            this.getList()
             this.addMeetingVisible = false
             this.$notify({
               title: 'Success',

@@ -116,8 +116,8 @@ export default {
       meetingList: [],
       temp: {
         meetingId: '',
-        name: '',
-        createTime: new Date()
+        name: ''
+        // createTime: new Date()
       },
       dialogFormVisible: false,
       dialogStatus: '',
@@ -148,8 +148,8 @@ export default {
     resetTemp() {
       this.temp = {
         meetingId: '',
-        name: '',
-        createTime: new Date()
+        name: ''
+        // createTime: new Date()
       }
     },
     // 添加行程按钮

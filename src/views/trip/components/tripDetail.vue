@@ -121,6 +121,11 @@
                   <span>{{ row.itineraryTime }}</span>
                 </template>
               </el-table-column>
+              <el-table-column label="地址" align="center">
+                <template slot-scope="{ row }">
+                  <span>{{ row.address }}</span>
+                </template>
+              </el-table-column>
               <el-table-column label="备注" align="center">
                 <template slot-scope="{ row }">
                   <span>{{ row.remark }}</span>
