@@ -132,9 +132,10 @@
               >添加人员</el-button>
 
               <el-upload
+                :headers="myHeaders"
                 class="upload-demo"
                 :show-file-list="false"
-                action="https://wj.phoemix.net/elite/file"
+                action="https://wj.phoemix.net/elite/appUser/import"
                 :on-success="uploadSuccess"
               >
                 <el-button class="filter-item" style="margin-left: 10px;" type="primary">导入参加人员</el-button>
@@ -359,6 +360,7 @@ import {
 } from '@/api/meeting'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+import { getToken } from '@/utils/auth'
 export default {
   name: 'MeetingDetail',
   components: { Pagination },
@@ -381,6 +383,7 @@ export default {
   },
   data() {
     return {
+      myHeaders: {},
       venueVisible: false,
       meetingForm: {},
       tableKey: 0,
@@ -470,6 +473,7 @@ export default {
       this.getVenueList()
       this.meetingDetail()
     }
+    this.myHeaders.Authorization = getToken()
   },
   methods: {
     // 文件上传

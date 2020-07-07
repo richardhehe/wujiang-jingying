@@ -198,6 +198,9 @@
         <el-form-item label="时间段" prop="itineraryTime">
           <el-input v-model="timeForm.itineraryTime" />
         </el-form-item>
+        <el-form-item label="地址" prop="address">
+          <el-input v-model="timeForm.address" />
+        </el-form-item>
         <el-form-item label="备注">
           <el-input v-model="timeForm.remark" />
         </el-form-item>
@@ -263,6 +266,7 @@ export default {
       timeForm: {
         itineraryDateId: '',
         itineraryTime: '',
+        address: '',
         remark: ''
       },
       timeListQuery: {
@@ -311,7 +315,8 @@ export default {
         week: [{ required: true, message: '请填写星期', trigger: 'blur' }]
       },
       timeRules: {
-        itineraryTime: [{ required: true, message: '请填写时间段', trigger: 'blur' }]
+        itineraryTime: [{ required: true, message: '请填写时间段', trigger: 'blur' }],
+        address: [{ required: true, message: '请填地址', trigger: 'blur' }]
       },
       downloadLoading: false
     }
@@ -506,6 +511,7 @@ export default {
       this.timeForm = {
         itineraryDateId: '',
         itineraryTime: '',
+        address: '',
         remark: ''
       }
     },
